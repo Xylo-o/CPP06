@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:14:36 by kali              #+#    #+#             */
-/*   Updated: 2024/12/12 14:03:59 by kali             ###   ########.fr       */
+/*   Updated: 2024/12/12 14:32:29 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <cstring>
 #include <iomanip>
 #include <cctype>
+#include <cmath>
 #include "Colors.hpp"
 
 class ScalarConverter {
