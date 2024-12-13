@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:14:40 by kali              #+#    #+#             */
-/*   Updated: 2024/12/13 16:25:34 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:37:23 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void ScalarConverter::convert(const char* input) {
             if (std::isnan(d) || std::isinf(d)) {
                 std::cout << YELLOW << "char: " << NC << "impossible" << std::endl;
                 std::cout << CYAN << "int: " << NC << "impossible" << std::endl;
-			}
+			} 
             std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
             std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << static_cast<double>(d) << std::endl;
 		}
@@ -74,19 +74,20 @@ void ScalarConverter::convert(const char* input) {
 }
 
 std::string detectType(const char* input) {
-    if (strlen(input) == 1 && std::isalpha(input[0])) {
+    std::regex charRegex("^[a-zA-Z]$");
+    std::regex intRegex("^-?\\d+$");
+    std::regex floatRegex("^-?\\d*\\.\\d+f$");
+    std::regex doubleRegex("^-?\\d*\\.\\d+$");
+
+    if (std::regex_match(input, charRegex)) {
         return "char";
-    }
-    try {
-        std::stod(input);
-        if (strchr(input, '.') != nullptr) {
-            if (strchr(input, 'f') != nullptr) {
-                return "float";
-            }
-            return "double";
-        }
+    } else if (std::regex_match(input, intRegex)) {
         return "int";
-    } catch (const std::exception&) {
+    } else if (std::regex_match(input, floatRegex)) {
+        return "float";
+    } else if (std::regex_match(input, doubleRegex)) {
+        return "double";
+    } else {
         return "unknown";
     }
 }
