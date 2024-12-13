@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:14:40 by kali              #+#    #+#             */
-/*   Updated: 2024/12/12 15:24:43 by kali             ###   ########.fr       */
+/*   Updated: 2024/12/13 16:25:34 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,92 +23,70 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
 ScalarConverter::~ScalarConverter() {}
 
 void ScalarConverter::convert(const char* input) {
-    std::cout << GREEN << "Data converted successfully: " << NC << std::endl;
-    convertChar(input);
-    convertInt(input);
-    convertFloat(input);
-    convertDouble(input);
-}
-
-void convertChar(const char* input) {
-    char c = 'c';
-    double d = 0.0;
+    std::string type = detectType(input);
+    if (type == "unknown") {
+        std::cout << RED << "Unknown type" << NC << std::endl;
+        return;
+    }
     try {
-        d = std::stod(input);
-    } catch (const std::invalid_argument& e) {
-        if (strlen(input) == 1 && std::isalpha(input[0])) {
-            c = input[0];
-            std::cout << YELLOW << "char: " << NC << c << std::endl;
+        double d = std::stod(input);
+        if (type == "char") {
+            char c = input[0];
+            if (std::isprint(c)) {
+                std::cout << YELLOW << "char: '" << NC << c << YELLOW << "'" << NC << std::endl;
+            } else {
+                std::cout << YELLOW << "char: " << NC << "Non displayable" << std::endl;
+            }
+            std::cout << CYAN << "int: " << NC << static_cast<int>(c) << std::endl;
+            std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f" << std::endl;
+            std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << static_cast<double>(c) << std::endl;
+        } else if (type == "int") {
+			if (std::isnan(d) || std::isinf(d) || d > 2147483647 || d < -2147483648) {
+            	std::cout << YELLOW << "char: " << NC << "impossible" << std::endl;
+            	std::cout << CYAN << "int: " << NC << "impossible" << std::endl;
+				std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+            	std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << static_cast<double>(d) << std::endl;
+			}
+			else {
+             	if (d >= 32 && d <= 126) {
+                	std::cout << YELLOW << "char: " << NC << "'" << static_cast<char>(d) << "'" << std::endl;
+            	} else {
+            	    std::cout << YELLOW << "char: " << NC << "Non displayable" << std::endl;
+            	}
+            		std::cout << CYAN << "int: " << NC << static_cast<int>(d) << std::endl;
+            		std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+            		std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << static_cast<double>(d) << std::endl;				
+			}
         } else {
-            std::cout << YELLOW << "char: " << NC << "IMPOSSIBIBLE" << std::endl;
+            if (std::isnan(d) || std::isinf(d)) {
+                std::cout << YELLOW << "char: " << NC << "impossible" << std::endl;
+                std::cout << CYAN << "int: " << NC << "impossible" << std::endl;
+			}
+            std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+            std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << static_cast<double>(d) << std::endl;
+		}
+    } catch (const std::exception&) {
+        std::cout << YELLOW << "char: " << NC << "impossible" << std::endl;
+        std::cout << CYAN << "int: " << NC << "impossible" << std::endl;
+        std::cout << MAGENTA << "float: " << NC << "impossible" << std::endl;
+        std::cout << BLUE << "double: " << NC << "impossible" << std::endl;
+    }
+}
+
+std::string detectType(const char* input) {
+    if (strlen(input) == 1 && std::isalpha(input[0])) {
+        return "char";
+    }
+    try {
+        std::stod(input);
+        if (strchr(input, '.') != nullptr) {
+            if (strchr(input, 'f') != nullptr) {
+                return "float";
+            }
+            return "double";
         }
-        return;
-    } catch (const std::out_of_range& e) {
-        std::cout << YELLOW << "char: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
+        return "int";
+    } catch (const std::exception&) {
+        return "unknown";
     }
-    if (std::isnan(d) || std::isinf(d)) {
-        std::cout << YELLOW << "char: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    }
-    int i = static_cast<int>(d);
-    if (i >= 32 && i <= 126) {
-        c = static_cast<char>(i);
-    } else {
-        std::cout << YELLOW << "char: " << NC << "Non displayable" << std::endl;
-        return;
-    }
-    if (std::isprint(c)) {
-        std::cout << YELLOW << "char: " << NC << c << std::endl;
-    } else {
-        std::cout << YELLOW << "char: " << NC << "Non displayable" << std::endl;
-    }
-}
-
-void convertInt(const char* input) {
-    int i = 0;
-    double d = 0.0;
-    try {
-        d = std::stod(input);
-    } catch (const std::invalid_argument& e) {
-        std::cout << CYAN << "int: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    } catch (const std::out_of_range& e) {
-        std::cout << CYAN << "int: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    }
-    if (std::isnan(d) || std::isinf(d)) {
-        std::cout << CYAN << "int: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    }
-    i = static_cast<int>(d);
-    std::cout << CYAN << "int: " << NC << i << std::endl;
-}
-
-void convertFloat(const char* input) {
-    float f = 0.0f;
-    try {
-        f = std::stof(input);
-    } catch (const std::invalid_argument& e) {
-        std::cout << MAGENTA << "float: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    } catch (const std::out_of_range& e) {
-        std::cout << MAGENTA << "float: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    }
-    std::cout << MAGENTA << "float: " << NC << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-}
-
-void convertDouble(const char* input) {
-    double d = 0.0;
-    try {
-        d = std::stod(input);
-    } catch (const std::invalid_argument& e) {
-        std::cout << BLUE << "double: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    } catch (const std::out_of_range& e) {
-        std::cout << BLUE << "double: " << NC << "IMPOSSIBIBLE" << std::endl;
-        return;
-    }
-    std::cout << BLUE << "double: " << NC << std::fixed << std::setprecision(1) << d << std::endl;
 }

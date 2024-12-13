@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:14:36 by kali              #+#    #+#             */
-/*   Updated: 2024/12/12 14:32:29 by kali             ###   ########.fr       */
+/*   Updated: 2024/12/13 15:58:50 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <iomanip>
 #include <cctype>
 #include <cmath>
+#include <limits>
 #include "Colors.hpp"
 
 class ScalarConverter {
@@ -29,7 +30,4 @@ class ScalarConverter {
         void static convert(const char* input);
 };
 
-void convertChar(const char* input);
-void convertInt(const char* input);
-void convertFloat(const char* input);
-void convertDouble(const char* input);
+std::string detectType(const char* input);
