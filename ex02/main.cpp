@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:09:56 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/12/15 17:06:26 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:31:13 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int main (void) {
 	identify(base);
 	std::cout << YELLOW << "Using the reference: " << NC << std::endl;
 	identify(*base);
+	delete base;
 	return (0);
 }
