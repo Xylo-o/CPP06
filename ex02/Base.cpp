@@ -6,11 +6,11 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:08:20 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/12/15 16:22:17 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:06:20 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#include "Includes.hpp"
 
 Base::~Base() {}
 
@@ -32,27 +32,27 @@ Base* generate(void) {
 
 void identify(Base* p) {
     if (dynamic_cast<A*>(p)) {
-        std::cout << "A" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "A" << std::endl;
     } else if (dynamic_cast<B*>(p)) {
-        std::cout << "B" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "B" << std::endl;
     } else if (dynamic_cast<C*>(p)) {
-        std::cout << "C" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "C" << std::endl;
     } else {
-        std::cout << "Unknown type" << std::endl;
+        std::cout << RED << "Unknown type" << NC << std::endl;
     }
 }
 
 void identify(Base& p) {
     try {
         (void)dynamic_cast<A&>(p);
-        std::cout << "A" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "A" << std::endl;
     } catch (std::bad_cast&) {}
     try {
         (void)dynamic_cast<B&>(p);
-        std::cout << "B" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "B" << std::endl;
     } catch (std::bad_cast&) {}
     try {
         (void)dynamic_cast<C&>(p);
-        std::cout << "C" << std::endl;
+        std::cout << GREEN "The type exists and it's: " << NC << "C" << std::endl;
     } catch (std::bad_cast&) {}
 }

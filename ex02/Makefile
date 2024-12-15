@@ -1,4 +1,4 @@
-NAME := serial
+NAME := type
 CC := c++
 CCFLAGS := -Werror -Wextra -Wall -std=c++98
 
