@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:14:36 by kali              #+#    #+#             */
-/*   Updated: 2024/12/13 16:37:40 by adprzyby         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:36:49 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,4 @@ class ScalarConverter {
 };
 
 std::string detectType(const char* input);
+static void printConversions(double value, bool isFloat);
