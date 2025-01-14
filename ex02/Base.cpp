@@ -6,11 +6,15 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:08:20 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/12/15 17:06:20 by adprzyby         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:54:52 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include "Colors.hpp"
 
 Base::~Base() {}
 

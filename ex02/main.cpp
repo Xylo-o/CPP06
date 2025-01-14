@@ -6,11 +6,15 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:09:56 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/12/15 17:31:13 by adprzyby         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:49:18 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Includes.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include "Colors.hpp"
 
 int main (void) {
 	Base* base = generate();

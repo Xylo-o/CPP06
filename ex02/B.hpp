@@ -6,11 +6,11 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:08:02 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/12/15 16:28:08 by adprzyby         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:44:44 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "Includes.hpp"
+#include "Base.hpp"
 
 class B : public Base {};
